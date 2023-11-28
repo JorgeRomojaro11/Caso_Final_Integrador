@@ -5,3 +5,6 @@
 
 class Variant {
 public:
+    using Value = std::variant<int, double, char, std::string, std::vector<Variant>, std::function<void()>>;
+    using Json = nlohmann::json;
+

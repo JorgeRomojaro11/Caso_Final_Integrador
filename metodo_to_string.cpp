@@ -28,3 +28,13 @@ public:
             std::string operator()(void (*value)()) const {
                 return "Procedimiento";
             }
+        };
+
+        return std::visit(Visitor(), data);
+    }
+
+private:
+    Value data;
+};
+
+int main() {

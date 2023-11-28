@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <variant>
-#include <nlohmann/json.hpp>
+#include <json.hpp>
 
 class Variant {
 public:

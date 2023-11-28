@@ -21,4 +21,29 @@ public:
                     array.push_back(element.to_json_string());
                 }
                 return array;
+            }
+            Json operator()(const std::function<void()>&) const {
+                return "Procedimiento";
+            }
+        };
+
+        return std::visit(Visitor(), data);
+    }
+private:
+    Value data;
+};
+
+int main() {
+    Variant v1 = 42;
+    Variant v2 = 3.14;
+    Variant v3 = 'A';
+    Variant v4 = "Hola, Mundo!";
+    Variant v5 = std::vector<Variant>{1, 2, 3};
+    Variant v6 = []() { std::cout << "Hola desde el procedimiento." << std::endl; };
+
+    std::string jsonStr = v5.to_json_string().dump();
+    std::cout << jsonStr << std::endl;
+
+    return 0;
+}
 

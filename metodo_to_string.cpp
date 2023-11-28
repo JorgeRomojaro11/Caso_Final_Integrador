@@ -16,3 +16,16 @@ public:
             std::string operator()(const std::string& value) const { return value; }
             std::string operator()(const std::vector<Variant>& value) const {
                 std::string result = "[";
+                for (const auto& element : value) {
+                    result += element.to_string() + ", ";
+                }
+                if (!value.empty()) {
+                    result.erase(result.end() - 2, result.end()); // Eliminar la coma final y el espacio
+                }
+                result += "]";
+                return result;
+            }
+            std::string operator()(void (*value)()) const {
+                // Tratamiento especial para procedimientos, puedes personalizar según tus necesidades.
+                return "Procedimiento";
+            }

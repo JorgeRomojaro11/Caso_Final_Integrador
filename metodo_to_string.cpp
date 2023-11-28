@@ -38,3 +38,20 @@ private:
 };
 
 int main() {
+    Variant v1 = 42;
+    Variant v2 = 3.14;
+    Variant v3 = 'A';
+    Variant v4 = "Hola, Mundo!";
+    Variant v5 = std::vector<Variant>{1, 2, 3};
+    Variant v6 = +[]() { std::cout << "Hola desde el procedimiento." << std::endl; };
+
+    std::cout << v1.to_string() << std::endl;
+    std::cout << v2.to_string() << std::endl;
+    std::cout << v3.to_string() << std::endl;
+    std::cout << v4.to_string() << std::endl;
+    std::cout << v5.to_string() << std::endl;
+    v6.to_string();
+
+    return 0;
+}
+

@@ -20,12 +20,11 @@ public:
                     result += element.to_string() + ", ";
                 }
                 if (!value.empty()) {
-                    result.erase(result.end() - 2, result.end()); // Eliminar la coma final y el espacio
+                    result.erase(result.end() - 2, result.end());
                 }
                 result += "]";
                 return result;
             }
             std::string operator()(void (*value)()) const {
-                // Tratamiento especial para procedimientos, puedes personalizar según tus necesidades.
                 return "Procedimiento";
             }

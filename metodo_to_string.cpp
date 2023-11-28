@@ -1,12 +1,17 @@
 #include <iostream>
 #include <vector>
 #include <variant>
+#include <functional>
 
 class Variant {
 public:
-    using Value = std::variant<int, double, char, std::string, std::vector<Variant>, void (*)()>;
+    using Value = std::variant<int, double, char, std::string, std::vector<Variant>, std::function<void()>>;
 
     Variant(const Value& value) : data(value) {}
+
+    Variant(int i) {
+
+    }
 
     std::string to_string() const {
         struct Visitor {
@@ -25,7 +30,7 @@ public:
                 result += "]";
                 return result;
             }
-            std::string operator()(void (*value)()) const {
+            std::string operator()(const std::function<void()>&) const {
                 return "Procedimiento";
             }
         };
@@ -38,19 +43,17 @@ private:
 };
 
 int main() {
-    Variant v1 = 42;
-    Variant v2 = 3.14;
-    Variant v3 = 'A';
-    Variant v4 = "Hola, Mundo!";
-    Variant v5 = std::vector<Variant>{1, 2, 3};
-    Variant v6 = +[]() { std::cout << "Hola desde el procedimiento." << std::endl; };
+    Variant v1 = 11;
+    Variant v2 = 3.141592;
+    Variant v3 = static_cast<const Variant::Value &>('A');
+    Variant v4 = (Variant &&) "Hola,mundo!";
+    Variant v5 = static_cast<const Variant::Value &>(std::vector<Variant>{1, 2, 3});
 
     std::cout << v1.to_string() << std::endl;
     std::cout << v2.to_string() << std::endl;
     std::cout << v3.to_string() << std::endl;
     std::cout << v4.to_string() << std::endl;
     std::cout << v5.to_string() << std::endl;
-    v6.to_string();
 
     return 0;
 }
